@@ -71,7 +71,8 @@ export const login = async (req : Request , res : Response) =>{
             }
 
             const token = jwt.sign({
-                id : user._id
+                id : user._id,
+                role: user.role
             } ,   JWT_SECRET)
 
 
@@ -91,5 +92,31 @@ export const login = async (req : Request , res : Response) =>{
             message : error.message
         })
         
+    }
+}
+
+
+export const getProfile = async (req : Request , res : Response) => {
+    try {
+        //@ts-ignore
+        const userId = req.user.id ;
+        const user = await UserModel.findById(userId);
+
+        if(!user){
+            return res.status(404).json({
+                succcess : false ,
+                message : "User not found"
+            })
+        }
+
+        return res.status(200).json({
+            succcess : true ,
+            data : user
+        })
+    } catch (error : any) {
+        return res.status(500).json({
+            succcess : false ,
+            message : error.message
+        })
     }
 }

@@ -13,15 +13,18 @@ export const auth = async (req: any, res: any, next: any) => {
             })
          }
 
-         const decoded = jwt.verify(token , process.env.JWT_SECRET || "secret") as any;
+         const decoded = jwt.verify(token ,JWT_SECRET) as any;
 
          req.user = {
             id : decoded.id ,
             role : decoded.role
          }
          next();
-    } catch (error) {
-        
+    } catch (error : any) {
+        return res.status(500).json({
+            succcess : false ,
+            message : error.message
+        })
     }
 }
     
