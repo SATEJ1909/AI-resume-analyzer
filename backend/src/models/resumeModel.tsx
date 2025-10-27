@@ -7,9 +7,13 @@ const ResumeSchema = new mongoose.Schema({
     required: true,
   },
 
+  fileUrl: {
+    type: String,
+    required: true,
+  },
+
   resumeText: {
     type: String,
-    required: true, 
   },
 
   parsedData: {

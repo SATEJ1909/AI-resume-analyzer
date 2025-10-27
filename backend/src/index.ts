@@ -2,12 +2,14 @@ import dotevnv from 'dotenv';
 dotevnv.config();
 import express from 'express';
 import mongoose from 'mongoose';
-import UserRouter from './routes/routes.js';
+import UserRouter from './routes/userRoutes.js';
+import ResumeRouter from './routes/resumeRoute.js';
 const app = express();
 
 app.use(express.json());
 
 app.use("/api/v1/user" , UserRouter);
+app.use("/api/v1/resume" , ResumeRouter);
 
 
 async function main(){
